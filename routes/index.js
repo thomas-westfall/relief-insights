@@ -22,12 +22,12 @@ const logEventsToConsole = events => {
 };
 
 // 10km range around the -36.844480,174.768368 geopoint
-const withinParam = '10km@-36.844480,174.768368';
+const categoryParam = 'disasters';
 
 
 router.post('/d', function (req,res,next){
 
-phqEvents.search({within: withinParam})
+phqEvents.search({category: categoryParam})
     //.then(logEventsToConsole)
     .then((events) => res.send(events))
     .catch(err => console.error(err));
