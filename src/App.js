@@ -27,8 +27,14 @@ let test_user_password_access_token = process.env.TEST_USER_PASSWORD_ACCESS_TOKE
 
     const inputStyle ={
 
-	width: "200px",
+	width: "40rem",
     }
+
+	const toneStyle ={
+	    width: "40rem",
+	    backgroundColor: 'lightblue',
+	    display: 'block'
+	}
 
   const trStyle ={
 
@@ -95,7 +101,7 @@ class App extends React.Component {
     .then(res => {
 	    this.setState({ result: res.data});
 	    console.log(res.length);
-      console.log(res);
+	    console.log(res);
 
 	    this.setState({ 'result': res.data});
 	    //console.log(res.length);
@@ -136,11 +142,11 @@ class App extends React.Component {
 
   render(){
       const showDisplay = () => {
-	  if (this.state.result.length != 0){
+	  if ((this.state.result.length != 0) && (this.state.tones.length !=0)){
 	  return (
 
-		  this.state.result.map((d, index) => (
-						       <tr style={trStyle}> <Card> <CardContent> {d} </CardContent> </Card> </tr> ))
+		  this.state.result.map((d, index) => (<div style={{width:'100%'}}>
+						       <tr style={trStyle}> <Card > <CardContent> {d} </CardContent> </Card> </tr> <tr style={toneStyle}> {JSON.stringify(this.state.tones[index].result.document_tone.tones)}    </tr> </div>))
 
 		  );
 		
@@ -194,7 +200,7 @@ class App extends React.Component {
 </Button>
 
 <br/>    </center>
-    <Box boxShadow={3} style={{ margin:'30px', width: '50%', height: '40rem' }}>
+    <Box boxShadow={3} style={{ margin:'30px', width: '80%', height: '40rem' }}>
     <table style={mytable}>
 	{showDisplay()}
     </table>
