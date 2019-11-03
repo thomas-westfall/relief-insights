@@ -14,6 +14,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import { shadows } from '@material-ui/system';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
 let test_user_password_access_token = process.env.TEST_USER_PASSWORD_ACCESS_TOKEN
 
 
@@ -23,7 +27,7 @@ let test_user_password_access_token = process.env.TEST_USER_PASSWORD_ACCESS_TOKE
 
     const inputStyle ={
 
-	width: "20px",
+	width: "200px",
     }
 
   const trStyle ={
@@ -142,7 +146,26 @@ class App extends React.Component {
       
   return (
     <div className="App">
+<AppBar position="static">
+  <Toolbar>
+    <Typography variant="h6" >
+      Relief Insights 
+    </Typography>
+  </Toolbar>
+</AppBar>
+<br/>
     <center>
+    <Button variant = "outlined" style={buttonStyle} onClick={this.handleCheck}>Load Recents      </Button>
+<br/>
+    <FormControl style={inputStyle}>
+    <InputLabel style={inputStyle}>  </InputLabel>
+
+    <Select  onChange = {this.handleChange} value="Recent Disasters">
+	{getRecents()}
+</Select>
+</FormControl>
+
+<br/> <br/>
     <span style={hashtag}> # </span> <TextField style={divStyle}
           id="outlined-basic"
           margin="normal"
@@ -150,15 +173,7 @@ class App extends React.Component {
     value={this.state.value} onChange={this.handleChange}/> <Button variant = "outlined" style={buttonStyle} onClick={this.handleSubmit}>Search 
 </Button>
 
-    <Button variant = "outlined" style={buttonStyle} onClick={this.handleCheck}>Load Recents      </Button>
-<br/>
-    <FormControl style={inputStyle}>
-    <InputLabel style={inputStyle}>  </InputLabel>
-    <Select  onChange = {this.handleChange} value="Recent Disasters">
-	{getRecents()}
-</Select>
-</FormControl>
-<br/><br/>    </center>
+<br/>    </center>
     <Box boxShadow={3} style={{ margin:'30px', width: '50%', height: '40rem' }}>
     <table style={mytable}>
 	{showDisplay()}
