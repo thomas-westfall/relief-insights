@@ -21,6 +21,11 @@ import Typography from '@material-ui/core/Typography';
 let test_user_password_access_token = process.env.TEST_USER_PASSWORD_ACCESS_TOKEN
 
 
+    const padding = {
+
+    padding:'75px',
+}
+
     const cardStyleLeft = {
     height: "1000px",
 }
@@ -36,10 +41,17 @@ let test_user_password_access_token = process.env.TEST_USER_PASSWORD_ACCESS_TOKE
 	    display: 'block'
 	}
 
-  const trStyle ={
+	    const tone ={
+		width: "40rem",
+		height: "50px",
+		fontSize: '40px',
+	    }
+
+  const tdStyle ={
 
 
       display: "block",
+      width: "40rem",
       borderBottom: "1px solid lightblue",
 
 	}
@@ -68,7 +80,7 @@ const mytable= {
 
     display:"block",
     overflow:"auto",
-    height:"40rem",
+    height:"30rem",
     width:"100%",
 }
 
@@ -145,16 +157,25 @@ class App extends React.Component {
 	  if ((this.state.result.length != 0) && (this.state.tones.length !=0)){
 	  return (
 
-		  this.state.result.map((d, index) => (<div style={{width:'100%'}}>
-						       <tr style={trStyle}> <Card > <CardContent> {d} </CardContent> </Card> </tr> <tr style={toneStyle}> {JSON.stringify(this.state.tones[index].result.document_tone.tones)}    </tr> </div>))
+		  this.state.result.map((d, index) => 
 
-		  );
-		
+						       (JSON.stringify(this.state.tones[index].result.document_tone.tones) != "[]"  ?
+<div style={{width:'100%'}}>
+
+							<tr > <td style={tdStyle}> <Card> <CardContent> {d} </CardContent> </Card> </td><td style={tone}>
+						        
+							{JSON.stringify(this.state.tones[index].result.document_tone.tones[0].tone_id).split('"').join('')}
+
+
+ </td>
+ </tr> 
+							</div> :  <div></div> )));
+ 		
 	  }
 	  else {
 	      return "";
 	  }
-      };
+      }
 
       const getRecents = () => {
 	  if (this.state.recents.length != 0){
@@ -199,13 +220,16 @@ class App extends React.Component {
     value={this.state.value} onChange={this.handleChange}/> <Button variant = "outlined" style={buttonStyle} onClick={this.handleSubmit}>Search 
 </Button>
 
-<br/>    </center>
-    <Box boxShadow={3} style={{ margin:'30px', width: '80%', height: '40rem' }}>
+<br/>  
+  </center>
+<center>
+    <Box boxShadow={3} style={{ margin:'30px', width: '55%', height: '30rem' }}>
     <table style={mytable}>
 	{showDisplay()}
     </table>
 
     </Box>
+</center>
 
 </div>
 	  );
