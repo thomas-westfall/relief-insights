@@ -75,12 +75,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
-  let hashTag = req.body.hashTag;
-
-  let cleanedHashTag = formatInput(hashTag);
-
-  justGetTweets(cleanedHashTag)
-    .then((tweets) => {
+  let tweets = req.body.params.tweets;
       const promises = tweets.map(tweet => {
         let temp = {"text": ""};
         temp.text = tweet
@@ -90,11 +85,7 @@ router.post('/new', function (req, res, next) {
         //console.log(data)
         res.send(data)
       })
-
-    })
-    //.then((tones) => res.json(tones))
-    
-    // .then((tones) => res.json(tones))
+      
     .catch((err) => {
       console.error(err);
       reject(Error(err));
