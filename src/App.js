@@ -80,6 +80,7 @@ class App extends React.Component {
 	    console.log(res.length);
       console.log(res);
     })
+    .catch(err => console.error(err))
     event.preventDefault();
   }
 
