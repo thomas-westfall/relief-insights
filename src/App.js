@@ -72,7 +72,9 @@ const mytable= {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: '', result: '', recents: ''};
+
+    this.state = {value: '', result: '', tones: [], recents: ''};
+
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -91,10 +93,28 @@ class App extends React.Component {
       hashTag: this.state.value
     })
     .then(res => {
-
 	    this.setState({ result: res.data});
 	    console.log(res.length);
       console.log(res);
+
+	    this.setState({ 'result': res.data});
+	    //console.log(res.length);
+      //console.log(res);
+    })
+    .then(res => {
+      console.log(this.state.result)
+      axios.post('/new',{
+        params:{
+          tweets: this.state.result
+        }
+      })
+      .then(res =>{
+        this.setState({'tones': res.data})
+      })
+      .then(res =>{
+        console.log(this.state.tones)
+      })
+
     })
     .catch(err => console.error(err))
     event.preventDefault();
