@@ -48,6 +48,7 @@ class App extends React.Component {
     .then(res => { 
       console.log(res);
     })
+    .catch(err => console.error(err))
     event.preventDefault();
   }
 
