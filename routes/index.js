@@ -74,4 +74,31 @@ router.post('/', function (req, res, next) {
 
 });
 
+router.post('/new', function (req, res, next) {
+  let hashTag = req.body.hashTag;
+
+  let cleanedHashTag = formatInput(hashTag);
+
+  justGetTweets(cleanedHashTag)
+    .then((tweets) => {
+      const promises = tweets.map(tweet => {
+        let temp = {"text": ""};
+        temp.text = tweet
+        return toneAnalyzer(temp)//.then(res => res.data)
+      })
+      Promise.all(promises).then(data => {
+        //console.log(data)
+        res.send(data)
+      })
+
+    })
+    //.then((tones) => res.json(tones))
+    
+    // .then((tones) => res.json(tones))
+    .catch((err) => {
+      console.error(err);
+      reject(Error(err));
+    });
+
+});
 module.exports = router;
