@@ -42,11 +42,11 @@ class App extends React.Component {
 
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.state.value);
-    axios.post('/', {
+    axios.post('/d', {
       hashTag: this.state.value
     })
     .then(res => { 
-      console.log(res.data);
+      console.log(res);
     })
     event.preventDefault();
   }
